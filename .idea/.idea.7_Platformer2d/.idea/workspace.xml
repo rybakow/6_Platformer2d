@@ -9,7 +9,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimatorPlayerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -68,6 +67,8 @@
       <updated>1692044893648</updated>
       <workItem from="1692044898358" duration="1462000" />
       <workItem from="1692081566136" duration="4962000" />
+      <workItem from="1692124849226" duration="684000" />
+      <workItem from="1692128331571" duration="1000" />
     </task>
     <servers />
   </component>

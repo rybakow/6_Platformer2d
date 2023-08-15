@@ -5,13 +5,11 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
-    public UnityEvent Return;
-    
+    [SerializeField] private UnityEvent _returned;
     [SerializeField] private float _speed;
 
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
-    private Rigidbody2D _rigidbody;
 
     private bool direction = true;
     
@@ -19,9 +17,6 @@ public class EnemyController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        
-        Return.AddListener(Turn());
     }
 
     private void Update()
@@ -40,8 +35,14 @@ public class EnemyController : MonoBehaviour
         _animator.SetFloat(AnimatorPlayerController.Params.Speed, Math.Abs(movement));
     }
 
-    private void Turn()
+    public void Turn()
     {
         direction = !direction;
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.TryGetComponent(out NavigationBorder navigationBorder))
+            _returned.Invoke();
     }
 }

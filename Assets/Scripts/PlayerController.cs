@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -7,10 +8,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpPower;
     [SerializeField] private Transform _groundControlPoint;
-    
+    [SerializeField] private Text _coinHUDValue;
+
+    private int _coins = 0;
+
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
+
+    public int Coins => _coins;
+
+    public void AddCoin()
+    {
+        _coins += 1;
+        _coinHUDValue.text = _coins.ToString();
+    }
     
     private void Awake()
     {
