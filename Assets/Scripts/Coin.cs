@@ -21,7 +21,8 @@ public class Coin : MonoBehaviour
         {
             Vector3 leftTopCorner = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight));
 
-            transform.position = Vector3.MoveTowards(transform.position, leftTopCorner, Time.deltaTime * _speedOfAway);
+            transform.position = Vector3.MoveTowards(transform.position, leftTopCorner, 
+                Time.deltaTime * _speedOfAway);
 
             if (transform.position == leftTopCorner)
                 Destroy(this.gameObject);
