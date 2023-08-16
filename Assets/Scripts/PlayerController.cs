@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(SpriteRenderer))]
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -10,20 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _groundControlPoint;
     [SerializeField] private Text _coinHUDValue;
 
-    private int _coins = 0;
-
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
 
+    private float _groundControlDistance = 0.05f;
+    private int _coins = 0;
+
     public int Coins => _coins;
 
-    public void AddCoin()
-    {
-        _coins += 1;
-        _coinHUDValue.text = _coins.ToString();
-    }
-    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -35,6 +31,12 @@ public class PlayerController : MonoBehaviour
     {
         Run();
         Jump();
+    }
+    
+    public void AddCoin()
+    {
+        _coins += 1;
+        _coinHUDValue.text = _coins.ToString();
     }
 
     private void Run()
@@ -54,7 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(_groundControlPoint.position, Vector2.down);
             
-            if (hit.collider != null && hit.distance < 0.05f)
+            if (hit.collider != null && hit.distance < _groundControlDistance)
                 _rigidbody.AddForce(new Vector2(0, _jumpPower), ForceMode2D.Impulse);
         }
     }

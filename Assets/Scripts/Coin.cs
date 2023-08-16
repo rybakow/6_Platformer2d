@@ -14,18 +14,7 @@ public class Coin : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
     }
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.TryGetComponent(out PlayerController player))
-        {
-            _audioSource.Play();
-            player.AddCoin();
-            isFlyingAway = true;
-        }
-    }
-
+    
     private void Update()
     {
         if (isFlyingAway)
@@ -36,6 +25,16 @@ public class Coin : MonoBehaviour
 
             if (transform.position == leftTopCorner)
                 Destroy(this.gameObject);
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.TryGetComponent(out PlayerController player))
+        {
+            _audioSource.Play();
+            player.AddCoin();
+            isFlyingAway = true;
         }
     }
 }

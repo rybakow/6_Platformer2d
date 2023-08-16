@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
+
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private UnityEvent _returned;
@@ -23,6 +24,12 @@ public class EnemyController : MonoBehaviour
     {
         Run();
     }
+    
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.TryGetComponent(out NavigationBorder navigationBorder))
+            _returned.Invoke();
+    }
 
     private void Run()
     {
@@ -38,11 +45,5 @@ public class EnemyController : MonoBehaviour
     public void Turn()
     {
         direction = !direction;
-    }
-    
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.TryGetComponent(out NavigationBorder navigationBorder))
-            _returned.Invoke();
     }
 }
